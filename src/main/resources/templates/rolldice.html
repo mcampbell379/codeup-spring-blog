@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="partials.html :: header">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div th:insert="partials.html :: navbar"></div>
+<h1>Guess a number:</h1>
+<form method="post" action="/rolldice">
+    <a href="/rolldice/1">1</a>
+    <a href="/rolldice/2">2</a>
+    <a href="/rolldice/3">3</a>
+    <a href="/rolldice/4">4</a>
+    <a href="/rolldice/5">5</a>
+    <a href="/rolldice/6">6</a>
+</form>
+
+<p>Your guess was: <span th:text="${userGuess}"></span></p>
+<p>The answer was: <span th:text="${actualGuess}"></span></p>
+
+<div th:insert="partials.html :: footer"></div>
+</body>
+</html>
