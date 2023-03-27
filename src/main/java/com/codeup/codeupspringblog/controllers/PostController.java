@@ -1,35 +1,47 @@
 package com.codeup.codeupspringblog.controllers;
 
+import com.codeup.codeupspringblog.models.Post;
+import com.codeup.codeupspringblog.repositories.PostRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@AllArgsConstructor
 @Controller
+@RequestMapping("/posts")
 public class PostController {
 
-    @GetMapping("/posts")
-    @ResponseBody
-    public String getPostIndex() {
-        return "gets posts index page";
+    private final PostRepository postDao;
+
+    @GetMapping
+    public String allPosts(Model model){
+        List<Post> posts = postDao.findAll();
+        model.addAttribute("posts", posts);
+
+        return "posts";
     }
 
-    @GetMapping("/posts/{id}")
-    @ResponseBody
-    public String getIndividualPost(@PathVariable int id) {
-        return "views an individual post with an id of: " + id;
+    @GetMapping("/{postId}")
+    public String getIndividualPost(@PathVariable long postId, Model model) {
+        Post post = postDao.findById(postId).get();
+        System.out.println(post);
+
+        model.addAttribute("title", post.getTitle());
+        model.addAttribute("body", post.getBody());
+        return "showPost";
     }
 
-    @GetMapping("/posts/create")
-    @ResponseBody
-    public String getCreatePostForm() {
-        return "gets the form for creating a post";
-    }
-
-    @PostMapping("/posts/create")
-    @ResponseBody
+    @GetMapping("/create")
     public String createPost() {
-        return "physically creates a new post via post request";
+        Post post = new Post();
+
+        post.setTitle("Heehoo");
+        post.setBody("Hello there my name is bob");
+
+        postDao.save(post);
+        return "posts";
     }
 }

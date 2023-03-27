@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head th:insert="partials.html :: header">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Single Post</title>
+</head>
+<body>
+<div th:insert="partials.html :: navbar"></div>
+
+<p><span th:text="${title}"></span></p>
+<p><span th:text="${body}"></span></p>
+
+<div th:insert="partials.html :: footer"></div>
+</body>
+</html>
