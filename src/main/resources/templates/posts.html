@@ -8,10 +8,10 @@
     <title>All Posts</title>
 </head>
 <body>
-<div th:insert="partials.html :: navbar"></div>
+<div th:insert="partials :: navbar"></div>
 
-<p>display all posts here</p>
+<p><span th:text="${posts}"></span></p>
 
-<div th:insert="partials.html :: footer"></div>
+<div th:insert="partials :: footer"></div>
 </body>
 </html>
