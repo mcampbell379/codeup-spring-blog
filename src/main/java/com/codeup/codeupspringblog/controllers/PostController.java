@@ -29,6 +29,8 @@ public class PostController {
         Post post = postDao.findById(postId).get();
         System.out.println(post);
 
+
+        //TODO: refactor to use a single post object as a single attribute
         model.addAttribute("postId", post.getId());
         model.addAttribute("title", post.getTitle());
         model.addAttribute("body", post.getBody());
