@@ -35,11 +35,15 @@ public class PostController {
     }
 
     @GetMapping("/create")
-    public String createPost() {
+    public String getCreatePostForm() {
+        return "create";
+    }
+    @PostMapping("/create")
+    public String createPost(@RequestParam String title, @RequestParam String body) {
         Post post = new Post();
 
-        post.setTitle("Heehoo");
-        post.setBody("Hello there my name is bob");
+        post.setTitle(title);
+        post.setBody(body);
 
         postDao.save(post);
         return "posts";
