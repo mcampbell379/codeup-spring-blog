@@ -29,6 +29,7 @@ public class PostController {
         Post post = postDao.findById(postId).get();
         System.out.println(post);
 
+        model.addAttribute("postId", post.getId());
         model.addAttribute("title", post.getTitle());
         model.addAttribute("body", post.getBody());
         return "showPost";
@@ -46,6 +47,7 @@ public class PostController {
         post.setBody(body);
 
         postDao.save(post);
-        return "posts";
+
+        return "redirect:/posts";
     }
 }
