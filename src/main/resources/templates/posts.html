@@ -11,7 +11,7 @@
 <div th:insert="partials :: navbar"></div>
 
 <div th:each="post : ${posts}">
-    <a href="/posts"><p th:text="${post.title}"></p></a>
+    <a th:href="@{'posts/' + ${post.id}}"><p th:text="${post.title}"></p></a>
     <p th:text="${post.body}"></p>
 </div>
 
