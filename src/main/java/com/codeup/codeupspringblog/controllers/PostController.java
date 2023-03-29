@@ -1,7 +1,6 @@
 package com.codeup.codeupspringblog.controllers;
 
 import com.codeup.codeupspringblog.models.Post;
-import com.codeup.codeupspringblog.models.User;
 import com.codeup.codeupspringblog.repositories.PostRepository;
 import com.codeup.codeupspringblog.repositories.UserRepository;
 import lombok.AllArgsConstructor;
@@ -24,7 +23,7 @@ public class PostController {
         List<Post> posts = postDao.findAll();
         model.addAttribute("posts", posts);
 
-        return "posts";
+        return "posts/index";
     }
 
     @GetMapping("/{postId}")
@@ -33,25 +32,20 @@ public class PostController {
         System.out.println(post);
 
         model.addAttribute("post", post);
-        return "showPost";
+        return "posts/showPost";
     }
 
     @GetMapping("/create")
     public String getCreatePostForm(Model model) {
         model.addAttribute("post", new Post());
-        return "create";
+        return "posts/create";
     }
     @PostMapping("/create")
     public String createPost(
 //            @RequestParam User user,  ****** going to be used when adding the ability to log in
-            @RequestParam String title,
-            @RequestParam String body)
+            @ModelAttribute Post post)
     {
-        Post post = new Post();
-
         post.setUser(userDao.findById(1L).get());
-        post.setTitle(title);
-        post.setBody(body);
 
         postDao.save(post);
 
