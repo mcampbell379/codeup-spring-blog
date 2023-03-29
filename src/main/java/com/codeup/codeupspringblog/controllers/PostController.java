@@ -48,9 +48,11 @@ public class PostController {
             @RequestParam String body)
     {
         Post post = new Post();
+
         post.setUser(userDao.findById(1L).get());
         post.setTitle(title);
         post.setBody(body);
+
         postDao.save(post);
 
         return "redirect:/posts";
