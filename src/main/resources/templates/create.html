@@ -7,10 +7,10 @@
 <body>
 <div th:insert="partials.html :: navbar"></div>
 
-<form method="post" action="/posts/create">
+<form th:method="post" th:action="@{/posts/create}" th:object="${post}">
     <div class="mb-3">
         <label for="title" class="form-label">Title</label>
-        <input type="text" class="form-control" id="title" name="title">
+        <input type="text" class="form-control" id="title" th:field="*{title}">
     </div>
     <div class="mb-3">
         <label for="body" class="form-label">Body</label>

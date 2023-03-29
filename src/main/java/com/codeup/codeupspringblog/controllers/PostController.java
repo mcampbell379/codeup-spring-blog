@@ -1,7 +1,9 @@
 package com.codeup.codeupspringblog.controllers;
 
 import com.codeup.codeupspringblog.models.Post;
+import com.codeup.codeupspringblog.models.User;
 import com.codeup.codeupspringblog.repositories.PostRepository;
+import com.codeup.codeupspringblog.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,7 @@ import java.util.List;
 public class PostController {
 
     private final PostRepository postDao;
+    private final UserRepository userDao;
 
     @GetMapping
     public String allPosts(Model model){
@@ -29,25 +32,24 @@ public class PostController {
         Post post = postDao.findById(postId).get();
         System.out.println(post);
 
-
-        //TODO: refactor to use a single post object as a single attribute
-        model.addAttribute("postId", post.getId());
-        model.addAttribute("title", post.getTitle());
-        model.addAttribute("body", post.getBody());
+        model.addAttribute("post", post);
         return "showPost";
     }
 
     @GetMapping("/create")
-    public String getCreatePostForm() {
+    public String getCreatePostForm(Model model) {
+        model.addAttribute("post", new Post());
         return "create";
     }
     @PostMapping("/create")
-    public String createPost(@RequestParam String title, @RequestParam String body) {
+    public String createPost(
+            @RequestParam String title,
+            @RequestParam String body)
+    {
         Post post = new Post();
-
+        post.setUser(userDao.findById(1L).get());
         post.setTitle(title);
         post.setBody(body);
-
         postDao.save(post);
 
         return "redirect:/posts";
