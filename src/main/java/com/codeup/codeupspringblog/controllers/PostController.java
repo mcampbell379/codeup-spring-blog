@@ -41,13 +41,13 @@ public class PostController {
         return "posts/create";
     }
     @PostMapping("/create")
-    public String createPost(
-            @ModelAttribute Post post)
-    {
+    public String createPost(@ModelAttribute Post post) {
         post.setUser(userDao.findById(1L).get());
 
         postDao.save(post);
 
         return "redirect:/posts";
     }
+
+
 }
