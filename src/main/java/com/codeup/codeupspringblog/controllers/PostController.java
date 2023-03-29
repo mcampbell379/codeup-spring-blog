@@ -42,7 +42,6 @@ public class PostController {
     }
     @PostMapping("/create")
     public String createPost(
-//            @RequestParam User user,  ****** going to be used when adding the ability to log in
             @ModelAttribute Post post)
     {
         post.setUser(userDao.findById(1L).get());
