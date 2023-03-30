@@ -10,9 +10,11 @@
 <body>
 <div th:insert="partials.html :: navbar"></div>
 
-<p><span th:text="${post.title}"></span></p>
-<p><span th:text="${post.body}"></span></p>
-<p><span th:text="${post.user.email}"></span></p>
+<div class="container">
+    <p><span th:text="${post.title}"></span></p>
+    <p><span th:text="${post.body}"></span></p>
+    <p><span th:text="${post.user.email}"></span></p>
+</div>
 
 <div th:insert="partials.html :: footer"></div>
 </body>

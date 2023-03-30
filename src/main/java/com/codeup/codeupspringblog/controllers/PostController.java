@@ -50,4 +50,10 @@ public class PostController {
     }
 
 
+    // i think this is reusing the create but not sure
+    @GetMapping("/{id}/edit")
+    public String getEditPostForm(@PathVariable long id, Model model){
+        model.addAttribute("post", postDao.findById(id));
+        return "posts/create";
+    }
 }
