@@ -21,5 +21,5 @@ public class Post {
     private String body;
 
     @ManyToOne
-    private User user;
+    private User creator;
 }

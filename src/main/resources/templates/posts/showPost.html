@@ -13,7 +13,7 @@
 <div class="container">
     <p><span th:text="${post.title}"></span></p>
     <p><span th:text="${post.body}"></span></p>
-    <p><span th:text="${post.user.email}"></span></p>
+    <p><span th:text="${post.getCreator.email}"></span></p>
     <a th:href="@{${post.id} + '/edit'}"><button type="submit" class="btn btn-primary">Edit</button></a>
 </div>
 

@@ -26,7 +26,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "creator")
     @ToString.Exclude
     private List<Post> posts;
 }
