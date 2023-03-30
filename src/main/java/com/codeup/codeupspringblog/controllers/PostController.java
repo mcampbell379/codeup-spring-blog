@@ -42,7 +42,7 @@ public class PostController {
     }
     @PostMapping("/create")
     public String createPost(@ModelAttribute Post post) {
-        post.setUser(userDao.findById(1L).get());
+        post.setCreator(userDao.findById(1L).get());
 
         postDao.save(post);
 
