@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="partials.html :: header">
+    <meta charset="UTF-8">
+    <title>Create a post</title>
+</head>
+<body>
+<div th:insert="partials.html :: navbar"></div>
+
+<!--bootstrap form-->
+<form method="post" action="/posts/create" th:object="${post}">
+    <div class="mb-3"fcsw2a >
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title" th:field="*{title}">
+    </div>
+    <div class="mb-3">
+        <label for="body" class="form-label">Body</label>
+        <input type="text" class="form-control" id="body" th:field="*{body}">
+    </div>
+    <input type="hidden" th:field="*{id}">
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<!--form from curriculum-->
+<!--<form th:action="@{/posts/create}" th:method="post" th:object="${post}">-->
+<!--    Title:-->
+<!--    <input th:field="*{title}" />-->
+<!--    <br />-->
+<!--    Description:-->
+<!--    <input th:field="*{body}" />-->
+<!--    <br />-->
+<!--    <input type="hidden" th:field="*{id}">-->
+<!--    <input type="submit" />-->
+<!--</form>-->
+
+<div th:insert="partials.html :: footer"></div>
+</body>
+</html>
