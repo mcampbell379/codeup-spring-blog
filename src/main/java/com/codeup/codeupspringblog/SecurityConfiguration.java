@@ -1,4 +1,4 @@
-package com.codeup.codeupspringblog.config;
+package com.codeup.codeupspringblog;
 
 import com.codeup.codeupspringblog.services.UserDetailsLoader;
 import org.springframework.context.annotation.Bean;
@@ -37,7 +37,7 @@ public class SecurityConfiguration {
                 /* Login configuration */
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/profile", true) // user's home page, it can be any URL
+                .defaultSuccessUrl("/posts", true) // user's home page, it can be any URL
                 .permitAll() // Anyone can go to the login page
 
                 /* Logout configuration */
@@ -50,8 +50,8 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 .requestMatchers(
                         "/posts/create", // only authenticated users can create ads
-                        "/posts/{id}/edit",// only authenticated users can edit ads
-                        "/profile"// only authenticated users can see a profile page
+                        "/posts/{id}/edit"// only authenticated users can edit ads
+
                 )
                 .authenticated()
 
@@ -60,6 +60,8 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 .requestMatchers("/", "/posts", "/posts/{id}", "/register", "/css/**", "/js/**") // anyone can see home, the ads pages, and sign up
                 .permitAll()
+
+
 
 
         ;

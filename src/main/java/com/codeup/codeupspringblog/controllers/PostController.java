@@ -1,10 +1,12 @@
 package com.codeup.codeupspringblog.controllers;
 
 import com.codeup.codeupspringblog.models.Post;
+import com.codeup.codeupspringblog.models.User;
 import com.codeup.codeupspringblog.repositories.PostRepository;
 import com.codeup.codeupspringblog.repositories.UserRepository;
 import com.codeup.codeupspringblog.services.EmailService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -46,7 +48,11 @@ public class PostController {
     }
     @PostMapping("/create")
     public String createPost(@ModelAttribute Post post) {
-        post.setCreator(userDao.findById(1L).get());
+        // TODO: get loggedInUser and assign it to the created post under setCreator
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.findById(loggedInUser.getId()).get();
+
+        post.setCreator(user);
 
         postDao.save(post);
 
