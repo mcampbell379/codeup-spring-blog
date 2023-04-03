@@ -3,20 +3,24 @@ package com.codeup.codeupspringblog.controllers;
 import com.codeup.codeupspringblog.models.Post;
 import com.codeup.codeupspringblog.repositories.PostRepository;
 import com.codeup.codeupspringblog.repositories.UserRepository;
-import lombok.AllArgsConstructor;
+import com.codeup.codeupspringblog.services.EmailService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@AllArgsConstructor
+
+@RequiredArgsConstructor
 @Controller
 @RequestMapping("/posts")
 public class PostController {
 
     private final PostRepository postDao;
     private final UserRepository userDao;
+    private final EmailService emailService;
+
 
     @GetMapping
     public String allPosts(Model model){
@@ -45,6 +49,8 @@ public class PostController {
         post.setCreator(userDao.findById(1L).get());
 
         postDao.save(post);
+
+        emailService.prepareAndSend(post, "a post is being created", "post being created");
 
         return "redirect:/posts";
     }
