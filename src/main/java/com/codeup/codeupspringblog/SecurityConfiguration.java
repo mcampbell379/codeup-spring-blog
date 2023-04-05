@@ -37,7 +37,7 @@ public class SecurityConfiguration {
                 /* Login configuration */
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/posts", true) // user's home page, it can be any URL
+                .defaultSuccessUrl("/posts", true)
                 .permitAll() // Anyone can go to the login page
 
                 /* Logout configuration */
@@ -49,8 +49,9 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers(
-                        "/posts/create", // only authenticated users can create ads
-                        "/posts/{id}/edit"// only authenticated users can edit ads
+                        "/posts/create",
+                        "/posts/{id}/edit",
+                        "/posts/{id}/delete"
 
                 )
                 .authenticated()
